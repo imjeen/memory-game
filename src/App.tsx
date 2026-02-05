@@ -1,31 +1,23 @@
-import { useMemoryGame } from "./hooks/useMemoryGame";
+import { GameProvider, useGame } from "./context/GameContext";
 import Stats from "./components/Stats";
 import GameBoard from "./components/GameBoard";
 
 export default function App() {
-  const { state, actions } = useMemoryGame();
+  return (
+    <GameProvider>
+      <h1 className="heading">翻翻看</h1>
+      <GameContent />
+    </GameProvider>
+  );
+}
 
+function GameContent() {
+  const { state } = useGame();
   return (
     <>
-      <h1 className="heading">翻翻看</h1>
-
-      <Stats
-        seconds={state.seconds}
-        moves={state.moves}
-        score={state.score}
-        startText={state.startText}
-        onRestart={actions.restart}
-      />
-
+      <Stats />
       <div className="win-message">{state.winMessage}</div>
-
-      <GameBoard
-        matrix={state.matrix}
-        openCards={state.openCards}
-        wonCards={state.wonCards}
-        disabled={state.disabled}
-        onTileClick={actions.handleTileClick}
-      />
+      <GameBoard />
     </>
   );
 }

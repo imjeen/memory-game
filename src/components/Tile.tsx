@@ -1,26 +1,24 @@
+import React from "react";
 import Icon from "./Icon";
+import { useGame } from "../context/GameContext";
 
 interface TileProps {
     id: number;
     svgNo: number;
-    isOpen: boolean;
-    isWon: boolean;
-    isDisabled: boolean;
-    onClick: (id: number, svgNo: number) => void;
 }
 
-const Tile: React.FC<TileProps> = ({
-    id,
-    svgNo,
-    isOpen,
-    isWon,
-    isDisabled,
-    onClick,
-}) => {
+const Tile: React.FC<TileProps> = ({ id, svgNo }) => {
+    const { state, actions } = useGame();
+    const { openCards, wonCards, disabled } = state;
+
+    const isOpen = openCards.includes(id);
+    const isWon = wonCards.includes(id);
+    const isDisabled = disabled;
+
     return (
         <button
             disabled={isDisabled}
-            onClick={() => onClick(id, svgNo)}
+            onClick={() => actions.handleTileClick(id, svgNo)}
             className="tile"
         >
             <div
@@ -36,7 +34,7 @@ const Tile: React.FC<TileProps> = ({
                         backgroundColor: isWon ? "#60dd8e" : "#f6fcb4",
                     }}
                 >
-                    <Icon className="icon" svgNo={svgNo} />
+                    <Icon svgNo={svgNo} />
                 </div>
             </div>
         </button>

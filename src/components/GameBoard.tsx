@@ -1,21 +1,11 @@
 import React from "react";
 import Tile from "./Tile";
+import { useGame } from "../context/GameContext";
 
-interface GameBoardProps {
-    matrix: number[][];
-    openCards: number[];
-    wonCards: number[];
-    disabled: boolean;
-    onTileClick: (id: number, svgNo: number) => void;
-}
+const GameBoard: React.FC = () => {
+    const { state } = useGame();
+    const { matrix } = state;
 
-const GameBoard: React.FC<GameBoardProps> = ({
-    matrix,
-    openCards,
-    wonCards,
-    disabled,
-    onTileClick,
-}) => {
     return (
         <div className="board">
             {matrix.map((row, rowIndex) =>
@@ -26,10 +16,6 @@ const GameBoard: React.FC<GameBoardProps> = ({
                             key={id}
                             id={id}
                             svgNo={svgNo}
-                            isOpen={openCards.includes(id)}
-                            isWon={wonCards.includes(id)}
-                            isDisabled={disabled}
-                            onClick={onTileClick}
                         />
                     );
                 })

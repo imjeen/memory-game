@@ -1,35 +1,23 @@
 
 interface IconProps {
     svgNo: number;
-    className?: string;
-    width?: string | number;
-    height?: string | number;
-    onClick?: () => void;
-    [key: string]: any;
 }
 
 export default function Icon({
     svgNo,
-    className = "",
-    width,
-    height,
-    onClick,
-    ...restProps
 }: IconProps) {
     let iconToShow;
 
     switch (svgNo) {
         case 1:
             iconToShow = (
-                <svg className={`icon ${className}`}
+                <svg className="icon"
                     id="Capa_1"
                     enableBackground="new 0 0 511.999 511.999"
-                    height={height || "512"}
+                    height="512"
                     viewBox="0 0 511.999 511.999"
-                    width={width || "512"}
+                    width="512"
                     xmlns="http://www.w3.org/2000/svg"
-                    onClick={onClick}
-                    {...restProps}
                 >
                     <g>
                         <g>
