@@ -80,7 +80,7 @@ body {
 .board {
     margin-top: 40px;
     width: 350px;
-    height: 350px;
+    /* height: 350px; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -163,7 +163,7 @@ body {
 
     .board {
         width: 550px;
-        height: 550px;
+        /* height: 550px; */
     }
 
     .icon {
