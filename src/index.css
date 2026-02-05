@@ -1,0 +1,178 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(/bg.png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    font: 14px / 20px BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.tile {
+    border: none;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.tile-flip {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.3s;
+    transform-style: preserve-3d;
+}
+
+/* this should happen when clicked */
+/* .tile:hover .tile-flip {
+    transform: rotateY(180deg);
+} */
+
+.front,
+.back {
+    border-radius: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 3px 6px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* background-color: #60dd8e; */
+.back {
+    /* background-color: #f6fcb4; */
+    transform: rotateY(180deg);
+    transition: 0.3s;
+}
+
+.front {
+    background-color: #0c3939;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.board {
+    margin-top: 40px;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    background: linear-gradient(315deg, rgba(42, 138, 141, 1) 0%, rgba(96, 221, 142, 1) 100%);
+    border-radius: 10px;
+    box-shadow: 8px 8px 20px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid #0c3939;
+}
+
+
+
+.heading {
+    /* -webkit-text-stroke: 1px #0c3939; */
+    letter-spacing: 3px;
+    margin: 40px 0;
+    text-align: center;
+    /* font-family: 'Luckiest Guy', cursive; */
+    color: #1d743e;
+}
+
+.display-container {
+    font-family: 'Signika', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.win-message {
+    transition: 1s;
+    font-family: 'Signika', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.time {}
+
+.moves {}
+
+.score {}
+
+.start {
+    border: 1px solid #0c3939;
+    font-family: 'Signika', sans-serif;
+    padding: 5px 10px;
+    font-size: 16px;
+    background: rgb(42, 138, 141);
+    background: linear-gradient(315deg, rgba(42, 138, 141, 1) 0%, rgba(96, 221, 142, 1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.start:hover {
+    box-shadow: 3px 3px 6px 1px rgba(0, 0, 0, 0.3);
+}
+
+
+@media screen and (min-width: 700px) {
+
+    .tile {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        margin: 10px;
+    }
+
+    .icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .board {
+        width: 550px;
+        height: 550px;
+    }
+
+    .icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .start {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+}
