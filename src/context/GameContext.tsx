@@ -7,6 +7,7 @@ import { useMemoryGame, type MemoryGameState } from "../hooks/useMemoryGame";
 interface GameContextType {
     state: MemoryGameState & { dimension: number }; // 游戏状态，包含当前棋盘、翻开的方块、匹配状态等
     actions: {
+        closeMessage: () => void;
         restart: (newDimension?: number) => number[][]; // 重新开始游戏的函数
         handleTileClick: (id: number, svgNo: number) => void; // 处理方块点击事件的函数
     };

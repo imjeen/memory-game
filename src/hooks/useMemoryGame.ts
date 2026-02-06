@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { generateGameMatrix } from "../utils/matrix";
 import { useTimer } from "./useTimer";
+import { genConfetti } from "../utils/confetti";
 
 /**
  * 记忆游戏状态接口
@@ -116,6 +117,8 @@ export function useMemoryGame() {
           if (updatedWonCards.length === totalCards) {
             stopTimer(); // 停止计时
             setWinMessage(`你用了 ${moves + 1} 步，花费了 ${seconds} 秒！`);
+            genConfetti();
+
           }
         }, 500);
       } else {
@@ -130,6 +133,10 @@ export function useMemoryGame() {
       }
     }
   };
+
+  const closeMessage = useCallback(() => {
+    setWinMessage("");
+  }, []);
 
   return {
     state: {
@@ -150,6 +157,7 @@ export function useMemoryGame() {
     actions: {
       restart,
       handleTileClick,
+      closeMessage,
     },
   };
 }

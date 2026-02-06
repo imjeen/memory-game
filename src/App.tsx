@@ -1,3 +1,4 @@
+import Message from "./components/Message";
 import { GameProvider, useGame } from "./context/GameContext";
 import Stats from "./components/Stats";
 import GameBoard from "./components/GameBoard";
@@ -39,7 +40,7 @@ function GameContent() {
         </select>
       </div>
       <Stats />
-      <div className="win-message">{state.winMessage}</div>
+      <Message text={state.winMessage} onClose={actions.closeMessage} />
 
     </>
   );
