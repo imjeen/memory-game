@@ -10,7 +10,7 @@ const Stats: React.FC = () => {
             <div className="time">时间: {seconds}s</div>
             <div className="moves">步数: {moves}</div>
             <div className="score">分数: {score}</div>
-            <button onClick={actions.restart} className="start">
+            <button onClick={() => actions.restart()} className="start">
                 {startText}
             </button>
         </div>

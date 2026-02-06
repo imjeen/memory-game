@@ -24,7 +24,8 @@ export interface MemoryGameState {
  * 记忆游戏逻辑 Hook
  */
 export function useMemoryGame() {
-  const [matrix, setMatrix] = useState<number[][]>([[], [], [], []]);
+  const [dimension, setDimension] = useState(4);
+  const [matrix, setMatrix] = useState<number[][]>([]);
   const [clickID, setClickID] = useState<number[]>([]);
   const [clickSVG, setClickSVG] = useState<number[]>([]);
   const [openCards, setOpenCards] = useState<number[]>([]);
@@ -34,19 +35,23 @@ export function useMemoryGame() {
   const [wonCards, setWonCards] = useState<number[]>([]);
   const [startText, setStartText] = useState("开始");
   const [winMessage, setWinMessage] = useState("");
-  
+
   // 引入计时器功能
   const { seconds, isActive: isTimerRunning, start: startTimer, stop: stopTimer, reset: resetTimer } = useTimer();
 
   /**
    * 重置/重新开始游戏
    */
-  const restart = useCallback(() => {
+  const restart = useCallback((newDimension?: number | React.MouseEvent) => {
     resetTimer(); // 重置计时
-    
-    // 生成新的随机 4x4 矩阵
-    const newMatrix = generateGameMatrix();
-    
+
+    // 检查 newDimension 是否为有效的数字（防止 Event 对象被当作数字）
+    const d = typeof newDimension === 'number' ? newDimension : dimension;
+    if (typeof newDimension === 'number') setDimension(newDimension);
+
+    // 生成新的随机 NxN 矩阵
+    const newMatrix = generateGameMatrix(d, d);
+
     setMatrix(newMatrix);
     setClickID([]);
     setClickSVG([]);
@@ -56,9 +61,9 @@ export function useMemoryGame() {
     setDisabled(false);
     setWinMessage("");
     setWonCards([]);
-    
+
     return newMatrix;
-  }, [resetTimer]);
+  }, [resetTimer, dimension]);
 
   // 初始化游戏
   useEffect(() => {
@@ -85,9 +90,12 @@ export function useMemoryGame() {
 
     const newClickID = [...clickID, id];
     const newClickSVG = [...clickSVG, svgNo];
-    
+
     setClickID(newClickID);
     setClickSVG(newClickSVG);
+
+    // 计算总卡片数（确保是偶数）
+    const totalCards = dimension * dimension % 2 === 0 ? dimension * dimension : dimension * dimension - 1;
 
     // 当点击了两张卡片时
     if (newClickSVG.length === 2) {
@@ -97,11 +105,18 @@ export function useMemoryGame() {
       if (newClickSVG[0] === newClickSVG[1]) {
         // 卡片配对成功
         setTimeout(() => {
-          setWonCards((prev) => [...prev, ...newClickID]);
+          const updatedWonCards = [...wonCards, ...newClickID];
+          setWonCards(updatedWonCards);
           setClickSVG([]);
           setClickID([]);
           setScore((s) => s + 1);
           setDisabled(false);
+
+          // 所有卡片均已配对成功
+          if (updatedWonCards.length === totalCards) {
+            stopTimer(); // 停止计时
+            setWinMessage(`你用了 ${moves + 1} 步，花费了 ${seconds} 秒！`);
+          }
         }, 500);
       } else {
         // 卡片配对失败
@@ -114,16 +129,11 @@ export function useMemoryGame() {
         }, 500);
       }
     }
-
-    // 所有卡片均已配对成功（16张卡片）
-    if (newOpenCards.length === 16) {
-      stopTimer(); // 停止计时
-      setWinMessage(`你用了 ${moves + 1} 步，花费了 ${seconds} 秒！`);
-    }
   };
 
   return {
     state: {
+      dimension,
       matrix,
       clickID,
       clickSVG,

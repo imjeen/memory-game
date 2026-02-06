@@ -7,10 +7,19 @@ const GameBoard: React.FC = () => {
     const { matrix } = state;
 
     return (
-        <div className="board">
+        <div
+            className="board"
+            style={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${state.dimension}, 1fr)`,
+                width: 'fit-content',
+                maxWidth: '95vw',
+                padding: '10px'
+            }}
+        >
             {matrix.map((row, rowIndex) =>
                 row.map((svgNo, colIndex) => {
-                    const id = rowIndex * 4 + colIndex + 1;
+                    const id = rowIndex * state.dimension + colIndex + 1;
                     return (
                         <Tile
                             key={id}
