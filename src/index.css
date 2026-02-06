@@ -169,3 +169,38 @@ body {
         font-size: 18px;
     }
 }
+
+.github-ribbon {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.github-ribbon a {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: -40px;
+    transform: rotate(45deg);
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    pointer-events: auto;
+    font-family: sans-serif;
+    font-size: 14px;
+    border: 1px solid #fff;
+}
+
+.github-ribbon a:hover {
+    background-color: #555;
+}

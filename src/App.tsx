@@ -5,6 +5,9 @@ import GameBoard from "./components/GameBoard";
 export default function App() {
   return (
     <GameProvider>
+      <div className="github-ribbon">
+        <a href="https://github.com/imjeen/memory-game" target="_blank" rel="noopener noreferrer">Star on GitHub</a>
+      </div>
       <h1 className="heading">记忆翻牌：水果乐园</h1>
       <GameContent />
     </GameProvider>

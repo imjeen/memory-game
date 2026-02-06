@@ -9,15 +9,15 @@ interface TileProps {
 
 const Tile: React.FC<TileProps> = ({ id, svgNo }) => {
     const { state, actions } = useGame();
-    const { openCards, wonCards, disabled } = state;
+    const { openCards, wonCards, /*disabled*/ } = state;
 
     const isOpen = openCards.includes(id);
     const isWon = wonCards.includes(id);
-    const isDisabled = disabled;
+    // const isDisabled = disabled;
 
     return (
         <button
-            disabled={isDisabled}
+            // disabled={isDisabled}
             onClick={() => actions.handleTileClick(id, svgNo)}
             className="tile"
         >
