@@ -2,7 +2,7 @@
  * 记忆游戏支持的图标总数
  * (src/components/Icon.tsx 中定义的 case 数量)
  */
-export const TOTAL_ICONS = 8;
+export const TOTAL_ICONS = 20;
 
 /**
  * 从数组中获取一个随机索引
